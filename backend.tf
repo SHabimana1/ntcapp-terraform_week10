@@ -3,6 +3,6 @@ terraform {
     bucket       = "w7-sh-terr-bucket"
     key          = "week10/terraform.tfstate"
     region       = "us-east-1"
-    #use_lockfile = false
+    use_lockfile = false
   }
 }
