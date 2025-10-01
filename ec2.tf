@@ -3,7 +3,7 @@
 
 resource "aws_instance" "server1" {
 
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
     ami = "ami-08982f1c5bf93d976"
     user_data = file ("setup.sh")
     subnet_id = aws_subnet.private1.id
@@ -17,7 +17,7 @@ resource "aws_instance" "server1" {
 
 resource "aws_instance" "server2" {
 
-    instance_type = "t3.micro"
+    instance_type = "t3.medium"
     ami = "ami-08982f1c5bf93d976"
     user_data = file ("setup.sh")
     subnet_id = aws_subnet.private2.id
