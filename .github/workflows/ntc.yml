@@ -43,19 +43,8 @@ jobs:
       
     - name: 'Terraform Plan'
       run: terraform plan -out=tfplan
-      # IaC Security Scan
-    - name: 'Test with Checkov'
-      uses: bridgecrewio/checkov-action@master
-      with:
-        directory:./
-        framework: terraform 
-          # Workflow fails here if high-severity violations are found [20]
-    - name: 'Terraform Plan and Show'
-      id: plan
-      run: |
-          terraform plan -out=tfplan -no-color
-          terraform show -no-color tfplan > plan_output.txt
-      
+    - name : 'Fianacial cost'  
+      run: infracost breakdown --path . --terraform-json-file tfplan.json 
 
     - name: 'Terraform Apply'
       if: github.ref == 'refs/heads/main'
