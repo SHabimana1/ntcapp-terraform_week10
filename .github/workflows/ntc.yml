@@ -43,9 +43,12 @@ jobs:
       
     - name: 'Terraform Plan'
       run: terraform plan -out=tfplan
-    - name : 'Fianacial cost'  
+      # 1. Generate a JSON report for the current infrastructure (e.g., 'main' branch)
+    
+    - name : infracost breakdown --path . --format json --out-file infracost-base.json  
       run: infracost breakdown --path . --terraform-json-file tfplan.json 
-
+# 2. Generate the cost difference against the baseline file
+      run: infracost diff --path . --compare-to infracost-base.json --format json --out-file infracost-diff.json
     - name: 'Terraform Apply'
       if: github.ref == 'refs/heads/main'
       run: terraform apply -auto-approve tfplan
